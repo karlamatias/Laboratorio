@@ -1,0 +1,19 @@
+{
+  "name": "laboratorio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./api/index.js",
+    "dev": "nodemon ./api/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
