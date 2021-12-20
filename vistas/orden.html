@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+        crossorigin="anonymous"></script>
+
+    <title>Orden Clinica</title>
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <div class="container-fluid">
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a style="border: none" class="btn btn-outline-light" aria-current="page" href="#">Orden
+                            Examen Clinico</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button style="border: none" class="btn btn-outline-light dropdown-toggle" type="button"
+                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Usuario
+                </button>
+                <div class="dropdown-menu text-center">
+
+                    <a class="dropdown-item" href="#">Usuario</a>
+                    <a class="dropdown-item" href="#">Area</a>
+                    <div class="dropdown-divider"></div>
+                    <form action="" method="">
+                        <button name="accion" value="Salir" class="dropdown-item" href="#">Salir</button>
+
+                    </form>
+
+
+                </div>
+
+            </div>
+
+    </nav>
+    <br>
+
+    <div class="d-flex">
+
+        <div class="col-sm-5 parte01">
+            <div class="card">
+                <form action="" method="">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Datos Paciente</label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="col-sm-6 d-flex">
+                                <input type="text" name="DPIPaciente" value="" class="form-control" placeholder="DPI">
+                                <input type="submit" name="accion" value="BuscarCliente" class="btn btn-outline-info">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" name="nombre" value="" class="form-control"
+                                    placeholder="Nombre Paciente">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Datos Examen</label>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="col-sm-6 d-flex">
+                                <input type="text" name="CodigoExamen" class="form-control" placeholder="Codigo">
+                                <input type="submit" name="accion" value="BuscarExamen" class="btn btn-outline-info"
+                                    placeholder="Nombre Examen">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" name="nombreExamen" value="" class="form-control"
+                                    placeholder="Nombre Examen">
+                            </div>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class="col-sm-6 d-flex">
+                                <input type="text" name="precio" value="" class="form-control" placeholder="Precio">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="number" value="1" name="cantidad" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="accion" value="Agregar" class="btn-outline-info">
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-sm-7">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex col-sm-6 ml-auto">
+                        <label>Numero de Orden</label>
+                        <input type="text" id="NoFactura" value="contar()" class="form-control">
+                    </div>
+                    <br>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">DPI Paciente</th>
+                                <th scope="col">Nombre Paciente</th>
+                                <th scope="col">Nombre Examen</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">SubTotal</th>
+                                <th scope="col" class="accion">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <c:forEach var="list" items="${lista}">
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <a href="#" class="btn btn-warning">Editar</a>
+                                        <a href="#" class="btn btn-danger">Eliminar</a>
+
+
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer d-flex">
+                    <div class="col-sm-6">
+                        <a href="" class="btn btn-success">Generar Orden</a>
+                        <input type="submit" name="accion" value="Cancelar" class="btn btn-danger">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!--Llamo los scripts que utilizare-->
+    <script src="/js/orden.js"></script>
+
+</body>
+
+</html>

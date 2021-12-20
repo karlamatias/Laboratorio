@@ -10,7 +10,7 @@ app.use(express.static('public'));
 
 app.use('/css',express.static(__dirname+'public/css'));
 app.use('/imagenes',express.static(__dirname+'public/imagenes'));
-//app.use('/js',express.static(__dirname+'public/js'));
+app.use('/js',express.static(__dirname+'public/js'));
 
 app.get('/' , (req , res)=>{
 
@@ -44,6 +44,30 @@ app.get('/secretaria' , (req , res)=>{
     res.status(201).sendFile(path.join(__dirname,'../vistas/laboratorio.html'));
  
  });
+
+ app.get('/usuarios' , (req , res)=>{
+
+   res.status(201).sendFile(path.join(__dirname,'../vistas/usuarios.html'));
+
+});
+
+app.get('/resultados' , (req , res)=>{
+
+   res.status(201).sendFile(path.join(__dirname,'../vistas/resultados.html'));
+
+});
+
+app.get('/orden' , (req , res)=>{
+
+   res.status(201).sendFile(path.join(__dirname,'../vistas/orden.html'));
+
+});
+
+app.get('/examen' , (req , res)=>{
+
+   res.status(201).sendFile(path.join(__dirname,'../vistas/examen.html'));
+
+});
 
 
 app.listen(port , ()=> console.log('> Server is up and running on port : ' + port))
