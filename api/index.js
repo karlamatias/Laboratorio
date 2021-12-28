@@ -1,73 +1,97 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const mysql = require('mysql');
+const  myConnection = require('express-myconnection');
+
+//importo las rutas 
+const laboratorioRutas = require('../rutas/Laboratorio')
 
 const port = process.env.PORT || 5000;
 
 
-
-app.use(express.static('public'));
-
-app.use('/css',express.static(__dirname+'public/css'));
-app.use('/imagenes',express.static(__dirname+'public/imagenes'));
-app.use('/js',express.static(__dirname+'public/js'));
-
-app.get('/' , (req , res)=>{
+const publico = path.join(__dirname, "../public");
 
 
+app.use(express.static(publico));
 
- console.log(path.join(__dirname,'../vistas/index.html'));
-  res.status(201).sendFile(path.join(__dirname,'../vistas/index.html'));
+app.set('views', path.join(__dirname, '../views'));
+app.set('view engine', 'ejs');
 
-});
+/**** mysql */
+//variables de entorno, esas vienen de docker
+const mysqlhost = process.env.MYSQLHOST || '192.168.0.15';
+const mysqluser = process.env.MYSQLUSER || "LaboratorioUser";
+const mysqlpass = process.env.MYSQLPASS || "LaBoRaToRio1";
 
-app.get('/secretaria' , (req , res)=>{
+//conexión
 
-    res.status(201).sendFile(path.join(__dirname,'../vistas/secretaria.html'));
- 
- });
+app.use(myConnection(mysql, {
+    host: mysqlhost,
+    user: mysqluser,
+    password: mysqlpass,
+    database: 'Laboratorio'
+  }, 'single'));
+  //middleware de express, para entender todos los datos que vienen de los formularios
+  app.use(express.urlencoded({extended: false}));
 
- app.get('/pacientes' , (req , res)=>{
 
-    res.status(201).sendFile(path.join(__dirname,'../vistas/pacientes.html'));
- 
- });
+//rutas
+app.use('/',laboratorioRutas);
 
- app.get('/administracion' , (req , res)=>{
 
-    res.status(201).sendFile(path.join(__dirname,'../vistas/administracion.html'));
- 
- });
-
- app.get('/laboratorio' , (req , res)=>{
-
-    res.status(201).sendFile(path.join(__dirname,'../vistas/laboratorio.html'));
- 
- });
-
- app.get('/usuarios' , (req , res)=>{
-
-   res.status(201).sendFile(path.join(__dirname,'../vistas/usuarios.html'));
+/*
+app.get('/', (req, res) => {
+    console.log(path.join(__dirname, '../vistas/index.html'));
+    res.status(201).sendFile(path.join(__dirname, '../vistas/index.html'));
 
 });
 
-app.get('/resultados' , (req , res)=>{
-
-   res.status(201).sendFile(path.join(__dirname,'../vistas/resultados.html'));
-
-});
-
-app.get('/orden' , (req , res)=>{
-
-   res.status(201).sendFile(path.join(__dirname,'../vistas/orden.html'));
+app.get('/secretaria', (req, res) => {
+    res.status(201).sendFile(path.join(__dirname, '../vistas/secretaria.html'));
 
 });
 
-app.get('/examen' , (req , res)=>{
-
-   res.status(201).sendFile(path.join(__dirname,'../vistas/examen.html'));
+app.get('/pacientes', (req, res) => {
+    res.status(201).sendFile(path.join(__dirname, '../vistas/pacientes.html'));
 
 });
 
+app.get('/administracion', (req, res) => {
 
-app.listen(port , ()=> console.log('> Server is up and running on port : ' + port))
+    res.status(201).sendFile(path.join(__dirname, '../vistas/administracion.html'));
+
+});
+
+app.get('/laboratorio', (req, res) => {
+
+    res.status(201).sendFile(path.join(__dirname, '../vistas/laboratorio.html'));
+
+});
+
+app.get('/usuarios', (req, res) => {
+
+    res.status(201).sendFile(path.join(__dirname, '../vistas/usuarios.html'));
+
+});
+
+app.get('/resultados', (req, res) => {
+
+    res.status(201).sendFile(path.join(__dirname, '../vistas/resultados.html'));
+
+});
+
+app.get('/orden', (req, res) => {
+
+    res.status(201).sendFile(path.join(__dirname, '../vistas/orden.html'));
+
+});
+
+app.get('/examen', (req, res) => {
+
+    res.status(201).sendFile(path.join(__dirname, '../vistas/examen.html'));
+
+});*/
+
+
+app.listen(port, () => console.log(`listening on http://localhost:${port}`));
