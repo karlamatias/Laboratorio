@@ -7,8 +7,40 @@ const path = require('path');
 const publico = path.join(__dirname, "../public");
 
 controller.login = (req, res) => {
-    console.log(path.join(__dirname, '../views/index.html'));
-    res.status(201).sendFile(path.join(__dirname, '../views/index.html'));
+    res.render('index');
+
+}
+
+controller.admin = (req, res) => {
+    res.render('administracion');
+
+}
+
+controller.laboratorio = (req, res) => {
+    res.render('laboratorio');
+
+}
+
+controller.inicio = (req, res) => {
+    res.render('inicio');
+
+}
+
+controller.secretaria = (req, res) => {
+    res.render('secretaria');
+
+}
+
+controller.orden = (req, res) => {
+    res.render('orden');
+
+}
+controller.examen = (req, res) => {
+    res.render('examen');
+
+}
+controller.resultados= (req, res) => {
+    res.render('resultados');
 
 }
 
@@ -48,19 +80,27 @@ controller.save = (req, res) => {
 };
 
 //metodo para Editar datos a la BD
-controller.editar = (req, res) => {
-   //se obtiene el usuario del registro que se desea eliminar 
-   const { usuario } = req.params;
-   req.getConnection((err, conn) => {
-    conn.query('SELECT * FROM Usuario WHERE usuario = ?' [usuario], (error, rows) => {
-        res.render('editarUsuario', {
-            data: rows
+controller.edit = (req, res) => {
+    const { usuario } = req.params;
+    req.getConnection((err, conn) => {
+      conn.query("SELECT * FROM Usuario WHERE usuario = ?", [usuario], (err, rows) => {
+        res.render('Editar', {
+          data: rows[0]
         })
-
+      });
     });
-});
-};
+  };
 
+controller.update = (req, res) => {
+    const { usuario} = req.params;
+    const newCustomer = req.body;
+    req.getConnection((err, conn) => {
+  
+    conn.query('UPDATE Usuario set ? where usuario = ?', [newCustomer, usuario], (err, rows) => {
+      res.redirect('/usuarios');
+    });
+    });
+  };
 
 
 //metodo para eliminar datos a la BD
